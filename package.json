@@ -1,0 +1,31 @@
+{
+  "name": "nodejs_rest_api_with_jwt",
+  "version": "1.0.0",
+  "description": "node.js and express.js REST API with JWT",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "mongodb",
+    "API",
+    "JWT"
+  ],
+  "author": "Hanoak",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
