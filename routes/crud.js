@@ -4,14 +4,14 @@ const crudController = require('../controllers/crud');
 
 const router = express.Router();
 
-router.get('/get', crudController.getAllStudents);
+router.get('/get', crudController.getAllBooks);
 
-router.get('/get/:sid', crudController.getSingleStudent);
+router.get('/get/:bid', crudController.getSingleBook);
 
-router.post('/post', crudController.postStudent);
+router.post('/post', crudController.postBook);
 
-router.put('/put/:sid', crudController.putStudent);
+router.put('/put/:bid', crudController.putBook);
 
-router.delete('/delete/:sid', crudController.deleteStudent);
+router.delete('/delete/:bid', crudController.deleteBook);
 
 module.exports = router;
