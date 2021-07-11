@@ -1,10 +1,18 @@
-const {  } = require('express-validator/check');
+const { validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
 exports.getAuth = (req, res, next) => {
+
+    const errors = validationResult(req);
+    if(! errors.isEmpty()) {
+        const err = new Error('Validation failed.');
+        err.statusCode = 422;
+        err.data = errors.array();
+        throw err;
+    }
 
     const email = req.body.email;
     const password = req.body.password;
@@ -16,6 +24,7 @@ exports.getAuth = (req, res, next) => {
             if(! user) {
                 const err = new Error('Email not found!');
                 err.statusCode = 401;
+                err.data = {email: email, password: password};
                 throw err;
             }
             dbuser = user;
@@ -26,6 +35,7 @@ exports.getAuth = (req, res, next) => {
             if(! isEqual) {
                 const err = new Error('Wrong password!');
                 err.statusCode = 401;
+                err.data = {email: email, password: password};
                 throw err;
             }
 
