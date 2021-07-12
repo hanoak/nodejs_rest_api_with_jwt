@@ -22,7 +22,19 @@ router.post('/post', [
         .trim()
 ], crudController.postBook);
 
-router.put('/put/:bid', crudController.putBook);
+router.put('/put/:bid', [
+    body('name',"Provide a valid book's name")
+        .isString()
+        .isLength({ min: 4})
+        .trim(),
+    body('author', "Provide a valid author's name")
+        .isString()
+        .isLength({ min: 4})
+        .trim(),
+    body('price', "Provide a valid book's price")
+        .isNumeric()
+        .trim()
+], crudController.putBook);
 
 router.delete('/delete/:bid', crudController.deleteBook);
 
