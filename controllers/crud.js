@@ -113,3 +113,28 @@ exports.putBook = (req, res, next) => {
             }
         });
 };
+
+exports.deleteBook = (req, res, next) => {
+
+    const bid = req.params.bid;
+    Book.findById(bid)
+    .then(book => {
+
+        if(! book) {
+            const error = new Error('Could not find book.');
+            error.statusCode = 404;
+            throw error;
+        }
+
+        return Book.findByIdAndRemove(bid);
+    })
+    .then(result => {
+        res.status(200).json({ message: 'Book deleted.' });
+    })
+    .catch(err => {
+        if(! err.statusCode) {
+            err.statusCode = 500;
+            next(err);
+        }
+    });
+};
