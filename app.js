@@ -5,7 +5,7 @@ const authRoutes = require('./routes/auth');
 const crudRoutes = require('./routes/crud');
 
 const app = express();
-const MONGODBURL = "<your mongodb's cluster url here>";
+const MONGODBURL = "<Your mongodb URL goes here>";
 app.use(express.json());
 
 app.use((req, res, next) => {

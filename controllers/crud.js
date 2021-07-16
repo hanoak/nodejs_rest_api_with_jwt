@@ -28,7 +28,7 @@ exports.getSingleBook = (req, res, next) => {
         if(! book) {
             const error = new Error('Could not find book.');
             error.statusCode = 404;
-            throw error;
+            next(error);
         }
 
         res.status(200).json({
@@ -51,7 +51,7 @@ exports.postBook = (req, res, next) => {
     if(! errors.isEmpty()) {
         const error = new Error('Validation failed, provided data is incorrect.');
         error.statusCode = 422;
-        throw error;
+        next(error);
     }
 
     const book = new Book({
@@ -82,7 +82,7 @@ exports.putBook = (req, res, next) => {
     if(! errors.isEmpty()) {
         const error = new Error('Validation failed, provided data is incorrect.');
         error.statusCode = 422;
-        throw error;
+        next(error);
     }
 
     const bid = req.params.bid;
@@ -93,7 +93,7 @@ exports.putBook = (req, res, next) => {
             if(! book) {
                 const error = new Error('Could not find book.');
                 error.statusCode = 404;
-                throw error;
+                next(error);
             }
 
             book.name = req.body.name;
@@ -123,7 +123,7 @@ exports.deleteBook = (req, res, next) => {
         if(! book) {
             const error = new Error('Could not find book.');
             error.statusCode = 404;
-            throw error;
+            next(error);
         }
 
         return Book.findByIdAndRemove(bid);
